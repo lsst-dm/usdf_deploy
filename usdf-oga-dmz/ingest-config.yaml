@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: oga-butler-ingest-config
+  name: embargo-butler-ingest-config
 data:
   s3_url: https://s3dfrgw.slac.stanford.edu
   bts_bucket: rubin-bts
@@ -10,7 +10,7 @@ data:
   sts_bucket: rubin-sts
   sts_butler_repo: /repo/ir2
   summit_bucket: rubin-summit
-  summit_butler_repo: /repo/oga
+  summit_butler_repo: /repo/embargo
   test_bucket: rubin-summit-dev
   test_butler_repo: /home/lsst/repo
   tts_bucket: rubin-tts

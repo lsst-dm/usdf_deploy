@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oga-butler-idle
+  name: embargo-butler-idle
   labels:
     app: idle
 spec:
@@ -17,17 +17,17 @@ spec:
     spec:
       containers:
       - name: idle
-        image: "ghcr.io/lsst-dm/oga-butler-idle:latest"
+        image: "ghcr.io/lsst-dm/embargo-butler-idle:latest"
         env:
         - name: REDIS_HOST
           valueFrom:
             configMapKeyRef:
-              name: oga-butler-redis-common
+              name: embargo-butler-redis-common
               key: redis_host
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: oga-butler-ingest-secret
+              name: embargo-butler-ingest-secret
               key: redis_password
         resources:
           limits:

@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oga-butler-ingest-test
+  name: embargo-butler-ingest-test
   labels:
     app: ingest
     site: test
@@ -20,7 +20,7 @@ spec:
     spec:
       initContainers:
       - name: "fix-secret-permissions"
-        image: "ghcr.io/lsst-dm/oga-butler-ingest:merge"
+        image: "ghcr.io/lsst-dm/embargo-butler-ingest:merge"
         command:
         - "/bin/bash"
         - "-c"
@@ -35,43 +35,43 @@ spec:
           name: secrets
       containers:
       - name: ingest
-        image: "ghcr.io/lsst-dm/oga-butler-ingest:merge"
+        image: "ghcr.io/lsst-dm/embargo-butler-ingest:merge"
         imagePullPolicy: Always
         env:
         - name: S3_ENDPOINT_URL
           valueFrom:
             configMapKeyRef:
-              name: oga-butler-ingest-config
+              name: embargo-butler-ingest-config
               key: s3_url
         - name: REDIS_HOST
           valueFrom:
             configMapKeyRef:
-              name: oga-butler-redis-common
+              name: embargo-butler-redis-common
               key: redis_host
         - name: BUCKET
           valueFrom:
             configMapKeyRef:
-              name: oga-butler-ingest-config
+              name: embargo-butler-ingest-config
               key: test_bucket
         - name: BUTLER_REPO
           valueFrom:
             configMapKeyRef:
-              name: oga-butler-ingest-config
+              name: embargo-butler-ingest-config
               key: test_butler_repo
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: oga-butler-ingest-secret
+              name: embargo-butler-ingest-secret
               key: redis_password
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
-              name: oga-butler-ingest-secret
+              name: embargo-butler-ingest-secret
               key: s3_access
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
-              name: oga-butler-ingest-secret
+              name: embargo-butler-ingest-secret
               key: s3_key
         resources:
           limits:
@@ -88,4 +88,4 @@ spec:
         emptyDir: {}
       - name: db-auth
         secret:
-          secretName: oga-butler-ingest-dbauth
+          secretName: embargo-butler-ingest-dbauth
