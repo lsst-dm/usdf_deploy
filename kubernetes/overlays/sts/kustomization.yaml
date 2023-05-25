@@ -1,3 +1,13 @@
+images:
+- name: enqueue
+  newTag: "0.91"
+- name: ingest
+  newTag: "0.91"
+- name: idle
+  newTag: "0.91"
+- name: redis
+  newTag: "7.0.8"
+
 namespace: sts
 
 resources:
